@@ -68,12 +68,18 @@ define([
           }
       } // for
 
+      var prepared_params;
+      if (type.toLowerCase() == 'get'){
+        prepared_params = param;
+      }else{
+        prepared_params = JSON.stringify(param);
+      }
       // send AJAX request, catch success or error callback
       $.ajax({
           url: url,
           dataType: "json",
           contentType: "application/json",
-          data: JSON.stringify(param),
+          data: prepared_params,
           headers: header,
           type: type.toUpperCase(),
           success: displaySuccess,
